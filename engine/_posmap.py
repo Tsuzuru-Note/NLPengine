@@ -34,3 +34,11 @@ _jp_ko_pos_map_ = {
     "その他": "기타",
     "未知語": "기타",
 }
+
+def jp_pos_to_kr(pos: str) -> str:
+    """
+    Convert POS JP -> KR
+
+    FIXME: Mecab pos DB 참고하기.
+    """
+    return _jp_ko_pos_map_.get(pos, pos)

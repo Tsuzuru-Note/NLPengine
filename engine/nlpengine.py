@@ -1,7 +1,7 @@
 import MeCab
 from . import tools
 from .tools.SentenceContext import SentenceContext
-from ._posmap import _jp_ko_pos_map_
+from ._posmap import jp_pos_to_kr
 
 
 class NLPEngine:
@@ -45,21 +45,15 @@ class NLPEngine:
             surface = cols[0]
             reading = cols[1] if cols[1] else ""
             base = cols[3] if cols[3] and cols[3] != "*" else surface
-            pos_full = cols[4]
 
-            # FIXME: pos 정보가  많음..
+            pos_full = cols[4]
             pos = pos_full.split("-")[0]
 
             token = {
-                "surface": surface,
-                "kanji": base,
-                "reading": reading,
-                "pos": pos,
-                "pos_detail": pos_full,
-                "conjugation": {
-                    "type": cols[5] if len(cols) > 5 else "",
-                    "form": cols[6] if len(cols) > 6 else ""
-                }
+                "surface": surface,         # 표면형
+                "kanji": base,              # 표기
+                "reading": reading,         # 읽는법
+                "pos": jp_pos_to_kr(pos),   # 품사
             }
 
             tokens.append(token)

@@ -1,11 +1,12 @@
 import json
+from .SentenceContext import SentenceContext
 
-class JsonPayload:
-    def __init__(self, payload):
-        self.payload = payload
 
-    def parse(self):
-        pass
-
-    def load(self):
-        pass
+def sentence_context_to_json(ctx: SentenceContext) -> dict:
+    return {
+        "sentence": {
+            "id": ctx.sentence_id,
+            "text": ctx.text
+        },
+        "tokens": ctx.tokens
+    }

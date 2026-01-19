@@ -31,5 +31,7 @@ $ cd < Path of The Project's root >
 $ conda create -n NLPengine python=3.10.19
 $ conda activate NLPengine
 $ pip install -r requirement.txt
+
+# Test the NLPengine's basic functions 
 $ python -m tests.nlpengine # For testing the Basic of the NLPengine
 ```

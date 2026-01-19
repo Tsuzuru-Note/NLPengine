@@ -17,7 +17,19 @@ if __name__ == '__main__':
     # print(f"_tokenize test : {result_tokenize}")
     print("-------------------------------------------")
     print(f"_split_into_sentences test : {engine.sentences}")
-    print("--------- analyze the first text ---------")
-    engine._analyze_sentence(engine.sentences[0])
-    analyze0result = sentence_context_to_json(engine.sentences[0])
-    print(json.dumps(analyze0result, ensure_ascii=False, indent=2))
+
+    print("--------- analyze all sentences ---------")
+
+    results = {
+        "sentences": []
+    }
+
+    for sentence in engine.sentences:
+        engine._analyze_sentence(sentence)
+        sentence_json = sentence_context_to_json(sentence)
+        results["sentences"].append(sentence_json)
+
+    with open("analyze_result.json", "w", encoding="utf-8") as f:
+        json.dump(results, f, ensure_ascii=False, indent=2)
+
+    print("-- Done to analyze all sentences --")

@@ -34,26 +34,3 @@ class TextSplitter:
             result.append(buffer.strip())
 
         return result
-
-
-if __name__ == "__main__":
-    splitter = TextSplitter()
-
-    text = "今日は雨です。明日は晴れるでしょう！本当ですか？"
-    sentences = splitter.split(text)
-
-    print(sentences)
-    print(type(sentences))
-    print(len(sentences))
-
-    contexts = [
-        SentenceContext(sentence_id=i, text=s)
-        for i, s in enumerate(sentences)
-    ]
-
-    print("=== SentenceContext Test ===")
-    print(f"type: {type(contexts)}")
-    print(f"count: {len(contexts)}")
-
-    for ctx in contexts:
-        print(ctx)

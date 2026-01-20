@@ -11,13 +11,16 @@ text = """
 
 
 if __name__ == '__main__':
+    print(f"--------- analyze & pop test ---------")
     engine = NLPEngine()
-    engine._split_into_sentences(text)
-    # result_tokenize = engine._tokenize(text)
-    # print(f"_tokenize test : {result_tokenize}")
-    print("-------------------------------------------")
-    print(f"_split_into_sentences test : {engine.sentences}")
+    engine.analyze(text)
+    while True:
+        sentence = engine.pop_sentence()
+        if sentence is None:
+            break
 
+        print(sentence)
+    print("-------------------------------------------")
     print("--------- analyze all sentences ---------")
 
     results = {

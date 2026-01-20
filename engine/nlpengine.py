@@ -50,12 +50,31 @@ class NLPEngine:
             pos = pos_full.split("-")[0]
 
             token = {
-                "surface": surface,         # 표면형
-                "kanji": base,              # 표기
-                "reading": reading,         # 읽는법
-                "pos": jp_pos_to_kr(pos),   # 품사
+                "surface": surface,  # 표면형
+                "kanji": base,  # 표기
+                "reading": reading,  # 읽는법
+                "pos": jp_pos_to_kr(pos),  # 품사
             }
 
             tokens.append(token)
 
         ctx.tokens = tokens
+
+    def analyze(self, text: str) -> None:
+        """
+        Public API
+        """
+        self.sentences.clear()
+        self._split_into_sentences(text)
+
+        for ctx in self.sentences:
+            self._analyze_sentence(ctx)
+
+    def pop_sentence(self) -> SentenceContext | None:
+        """
+        Pop an analyzed sentence result.
+        """
+        if not self.sentences:
+            return None
+
+        return self.sentences.pop(0)

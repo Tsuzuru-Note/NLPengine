@@ -1,6 +1,7 @@
 import MeCab
 from . import tools
 from .tools.SentenceContext import SentenceContext
+from .tools.jsonpayload import sentence_context_to_json
 from ._posmap import jp_pos_to_kr
 
 
@@ -27,6 +28,9 @@ class NLPEngine:
         ]
 
     def _analyze_sentence(self, ctx: SentenceContext) -> None:
+        """
+        Analyze the sentence using MeCab
+        """
         raw = self.mecab.parse(ctx.text)
         ctx.mecab_raw = raw
 
@@ -51,7 +55,7 @@ class NLPEngine:
 
             token = {
                 "surface": surface,  # 표면형
-                "kanji": base,  # 표기
+                "lemma": base,  # 표기
                 "reading": reading,  # 읽는법
                 "pos": jp_pos_to_kr(pos),  # 품사
             }
@@ -69,6 +73,17 @@ class NLPEngine:
 
         for ctx in self.sentences:
             self._analyze_sentence(ctx)
+
+    def get_sentences(self):
+        result = {
+            "sentences": []
+        }
+        for sentence in self.sentences:
+            self._analyze_sentence(sentence)
+            sentence_json = sentence_context_to_json(sentence)
+            result["sentences"].append(sentence_json)
+
+        return result
 
     def pop_sentence(self) -> SentenceContext | None:
         """

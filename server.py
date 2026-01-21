@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, HTTPException
 from engine import NLPEngine
 
 # FIXME: Use for Server test
@@ -20,4 +20,9 @@ def hello_api(msg: str):
 
 @app.post("/nlpengine/")
 async def nlpengine(data: dict = Body(...)):
-    return {"received_data": data}
+    text = data.get("text")
+    if not text:
+        raise HTTPException(status_code=400, detail="Bad Request...")
+
+    engine.analyze(text)
+    return engine.get_sentences()

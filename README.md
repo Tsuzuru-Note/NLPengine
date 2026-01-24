@@ -8,15 +8,24 @@ a reading-focused language learning service for foreign language learners.
 
 # Links
 [Project summary](#project-summary)  
-[Tech](#Tech)
-
+[Tech](#Tech)  
+[API Specification](#API-Specification)  
 [frontend](https://github.com/Tsuzuru-Note/Frontend)  
 [backend](https://github.com/Tsuzuru-Note/BackEnd)
 
 # Project summary
 
+# API Specification
+`POST /nlpengine/`
+Analyze a Japanese text and return sentence-level NLP results.
+
 # Tech
 Python 3.10.19
+FastAPI
+Uvicorn
+MeCab
+
+Unix Domain Socket (UDS)
 
 # Local Testing (Based Conda with Ubuntu 22.04)
 ```bash
@@ -35,3 +44,14 @@ $ pip install -r requirement.txt
 # Test the NLPengine's basic functions 
 $ python -m tests.nlpengine # For testing the Basic of the NLPengine
 ```
+
+
+# Run the API Server (with. Unix Domain Socket)
+Start the FastAPI server using Uvicorn with UDS:
+```bash
+uvicorn server:app \
+  --uds /tmp/nlp_engine.sock
+```
+
+- `server:app` : Execuute FastAPI with server.py
+- `--uds` : Bind server to UDS

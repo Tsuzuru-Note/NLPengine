@@ -48,16 +48,18 @@ class NLPEngine:
 
             surface = cols[0]
             reading = cols[1] if cols[1] else ""
+
             base = cols[3] if cols[3] and cols[3] != "*" else surface
+            lemma = base.split("-")[0]
 
             pos_full = cols[4]
             pos = pos_full.split("-")[0]
 
             token = {
-                "surface": surface,  # 표면형
-                "lemma": base,  # 표기
-                "reading": reading,  # 읽는법
-                "pos": jp_pos_to_kr(pos),  # 품사
+                "surface": surface,         # 표면형
+                "lemma": lemma,             # 표기
+                "reading": reading,         # 읽는법
+                "pos": jp_pos_to_kr(pos),   # 품사
             }
 
             tokens.append(token)

@@ -42,6 +42,19 @@ class NLPEngine:
 
             cols = line.split("\t")
 
+            # FIXME:
+            #  MeCab parse() 재해석 할 것.
+            #  _analyze_sentence 함수 수정필요.
+            #  아래 내용은 (#6)issue 대응용 임시코드...
+            if len(cols) == 2:
+                features = cols[1].split(",")
+            cols = [
+                cols[0],  # surface임.
+                features[7] if len(features) > 7 else "",
+                "",
+                features[6] if len(features) > 6 else "*",
+                features[0],
+            ]
             # Skip malformed
             if len(cols) < 5:
                 continue

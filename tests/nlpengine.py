@@ -1,6 +1,6 @@
 import json
-from engine.nlpengine import NLPEngine
-from engine.tools.jsonpayload import sentence_context_to_json
+from nlp_engine.engine.nlpengine import NLPEngine
+
 text = """
 私は毎朝コーヒーを飲みます。
 今日は天気が良いですね。

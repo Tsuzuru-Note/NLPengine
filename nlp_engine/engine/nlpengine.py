@@ -1,4 +1,11 @@
-import MeCab
+try:
+    import MeCab
+except ImportError as e:
+    raise RuntimeError(
+        "Wait, MeCab is not installed.\n"
+        "Please install system dependency:\n"
+        "sudo apt-get install mecab libmecab-dev mecab-ipadic-utf8\n"
+    )
 from . import tools
 from .tools.SentenceContext import SentenceContext
 from .tools.jsonpayload import sentence_context_to_json

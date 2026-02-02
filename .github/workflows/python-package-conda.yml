@@ -20,6 +20,9 @@ jobs:
       run: |
           sudo apt update
           sudo apt install -y mecab libmecab-dev mecab-ipadic-utf8
+          MECAB_SYSCONFDIR=$(mecab-config --sysconfdir 2>/dev/null || echo /etc)
+          sudo ln -sf $MECAB_SYSCONFDIR/mecabrc /usr/local/etc/mecabrc
+
 
     - name: Add conda to system path
       run: |

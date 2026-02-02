@@ -1,4 +1,7 @@
 # The TSUZURU NLP engine
+
+[![Package CI](https://github.com/Tsuzuru-Note/NLPengine/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/Tsuzuru-Note/NLPengine/actions/workflows/python-package-conda.yml)
+
 NLP engine repository for TSUZURU,
 a reading-focused language learning service for foreign language learners.
 > Our goal is...

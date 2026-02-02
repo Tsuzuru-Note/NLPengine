@@ -1,4 +1,4 @@
-name: Python Package using Conda
+name: Tsuzuru-Note-NLPengine-CI
 
 on: [push]
 
@@ -20,6 +20,9 @@ jobs:
       run: |
           sudo apt update
           sudo apt install -y mecab libmecab-dev mecab-ipadic-utf8
+          MECAB_SYSCONFDIR=$(mecab-config --sysconfdir 2>/dev/null || echo /etc)
+          sudo ln -sf $MECAB_SYSCONFDIR/mecabrc /usr/local/etc/mecabrc
+
 
     - name: Add conda to system path
       run: |
@@ -41,4 +44,4 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
-        pytest
+        pytest -s

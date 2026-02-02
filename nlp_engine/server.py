@@ -2,7 +2,7 @@ from fastapi import FastAPI, Body, HTTPException
 from engine import NLPEngine
 
 # FIXME: Use for Server test
-from tests.helloserver import helloServer
+from tests.helloserver_test import helloServer
 
 #Server TEST
 hello_server = helloServer()

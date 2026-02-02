@@ -1,4 +1,5 @@
 import json
+import pytest
 from nlp_engine.engine.nlpengine import NLPEngine
 
 text = """
@@ -9,10 +10,39 @@ text = """
 この本を読み終わったら、次の本を買うつもりです。
 """
 
+engine = NLPEngine()
+
+"""
+    Part of PYTEST
+"""
+def test_nlpengine_basic():
+
+    engine.analyze(text)
+
+    sentences = engine.get_sentences()
+    assert sentences is not None
+    assert len(sentences) > 0
+
+def test_nlpengine_pop_one_text():
+    engine.analyze(text)
+
+    result = engine.pop_sentence()
+
+    assert result is not None
+
+    if isinstance(result, str):
+        text_value = result
+    else:
+        text_value = getattr(result, "text", None)
+
+    assert isinstance(text_value, str)
+    assert len(text_value) > 0
+
+    print(f"[Result of col 1.] {text_value}")
+
 
 if __name__ == '__main__':
     print(f"--------- analyze & pop test ---------")
-    engine = NLPEngine()
     engine.analyze(text)
     while True:
         sentence = engine.pop_sentence()
